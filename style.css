@@ -51,6 +51,8 @@ p {
     grid-area: result;
 }
 
+
+
 .box {
     display: flex;
     border-radius: 20px;
@@ -59,17 +61,54 @@ p {
 }
 
 .box .title {
-    display: flex;
-    justify-content: space-between;
+    /* display: flex;
+    justify-content: space-between; */
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
     margin: 5px 10px;
 
     color: var(--clr-dark);
+}
+
+.title .title-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 5%;
 }
 
 .title img {
     filter: invert(10%) sepia(94%) saturate(5393%) hue-rotate(186deg) brightness(98%) contrast(93%);
     width: 25px;
 }
+
+.title input {
+    width: 50%;
+    padding: 10px;
+    background-color: var(--clr-dark);
+    color: var(--clr-light);
+    cursor: pointer;
+    border: 2px solid var(--clr--primary);
+    border-radius: 20px;
+}
+
+.title input::placeholder {
+    color:var(--clr-lighter);
+    opacity: 0.5;
+}
+
+.title input:focus,
+.title input:hover,
+.title input:focus-visible,
+input[data-last-active-input="true"] {
+    border: 2px solid var(--clr-light);
+    outline: -webkit-focus-ring-color auto 1px;
+    outline-color: var(--clr-light);
+}
+
+
+
+
 
 .api-wrap {
     display: flex;
@@ -78,7 +117,7 @@ p {
 }
 
 .patients {
-    margin: 0 5px;
+    margin: 0 5px 10px;
     height: 800px;
     display: flex;
     flex-direction: column;
@@ -142,6 +181,7 @@ p {
 
 .icon {
     width:20px;
+    filter: invert(99%) sepia(52%) saturate(2416%) hue-rotate(178deg) brightness(108%) contrast(105%);
 }
 
 
@@ -158,6 +198,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 20px 0 15px;
 }
 
 .profile-img  img {
@@ -177,11 +218,12 @@ p {
 .profile-wrap .icon-wrap {
     display: flex;
     gap: 10px;
+    
 }
 
-.icon-wrap .icon {
-    background-color: var(--clr--primary);
-}
+/* .icon-wrap img {
+    filter: invert(24%) sepia(94%) saturate(1017%) hue-rotate(166deg) brightness(91%) contrast(93%);
+} */
 .label {
     font-size: 18px;
     font-weight: 500;
@@ -204,6 +246,13 @@ p {
     border-radius: 40px;
     border: 2px solid var(--clr--primary);
     padding: 20px;
+}
+
+
+
+.box .chart {
+    display: flex;
+    flex-direction: column;
 }
 
 @media screen and (max-width:834px) {

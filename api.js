@@ -155,6 +155,7 @@ fetch("https://fedskillstest.coalitiontechnologies.workers.dev", requestOptions)
 
             </div
         </div`
+        
        let change = setInterval(function () {
      
           console.log(patientInfo.gender);
