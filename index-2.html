@@ -15,14 +15,16 @@
 </head>
 
 <body>
+    <header id="header"></header>
+
     <div class="bento-grid">
         <div class="box p-list">
             <div class="api-wrap">
                 <div class="title">
                     <h2>Patients List</h2>
                     <div class="title-wrap">
-                        <input type="text" placeholder="Search" id="iSeach">
-                        <img src="img/search.svg" id="iIcon">
+                        <input type="text" placeholder="Search" id="iInput">
+                        <img src="img/search.svg" id="iSearch">
                     </div>
 
                 </div>
@@ -37,10 +39,8 @@
             <div class="api-wrap">
                 <div class="title">
                     <h1>Diagnosis History</h1>
-
-
                 </div>
-                <div style="width: 800px;"><canvas id="acquisitions"></canvas></div>
+                <div style="width: 800px;"><canvas id="lineChart"></canvas></div>
             </div>
         </div>
         
@@ -57,12 +57,16 @@
     </div>
 
 
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"
         integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="js/api.js">
+    </script>
+
+    <script>
+        $("#header").load( "header.html" );
     </script>
 
 </body>
