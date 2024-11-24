@@ -15,13 +15,118 @@ body {
     font-family: 'Rubik';
 }
 
-p {
-    margin: 0;
+::-webkit-scrollbar {
+    width: 16px;
 }
+
+::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: var(--clr-dark);
+    border: 1px solid #cacaca;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 3px solid transparent;
+   background-clip: content-box;
+    background-color: var(--clr-light);
+}
+  
+
+p, h1, h2, h5 {
+    margin: 0;
+    padding: 0;
+}
+
+/* header styles  */
+.header {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    margin: 20px;
+    padding: 10px;
+    border-radius: 40px;
+    color: var(--clr-lighter);
+    background-color: var(--clr-dark);
+}
+
+
+.header img {
+    filter: invert(99%) sepia(52%) saturate(2416%) hue-rotate(178deg) brightness(108%) contrast(105%);
+}
+
+.header .logo-wrap {
+    display: grid;
+    margin-left: 20px;
+}
+
+.header .logo {
+    display: flex;
+}
+
+.header .logo img {
+    width: 40%;
+}
+
+.header .options-wrap {
+    display: flex;
+    gap:10%;
+    align-items: center;
+    justify-content: center;
+}
+.header .option {
+    display: flex;
+    gap:10%;
+    align-items: center;
+    justify-content: center;
+}
+
+.header .h-profile-wrap {
+    display: flex;
+    margin-left: auto;
+    gap: 5px;
+    align-items: center;
+}
+
+.header .profile-img img {
+    width: 25px;
+    height: 25px;
+}
+
+.header .name-wrap {
+    margin-right: 10px;
+}
+
+.header .name-wrap h2 {
+    font-size: 15px;
+    font-weight: 700;
+}
+.header .name-wrap h5 {
+    font-size: 12px;
+    font-weight: 400;
+}
+    
+.header .vL {
+    border-left: 2px solid var(--clr-light);
+    height: 50px;
+}
+
+.header .icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.header .icons div:nth-child(1) img {
+    width: 25px;
+}
+.header .icons div:nth-child(2) img {
+    width: 5px;
+}
+/* header styles end  */
 
 .bento-grid {
 
-    width: 100%;
+    width: 98%;
     height: 800px ;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -32,6 +137,7 @@ p {
     "list chart chart profile"
     "list chart chart profile"
     "list list1 list1 result";
+    margin: 0 1%;
 }
 
 .bento-grid .p-list {
@@ -58,6 +164,7 @@ p {
     border-radius: 20px;
     background-color: var(--clr-white);
     border: 2px solid var(--clr--primary);
+    box-shadow: rgba(9, 93, 126, 0.24) 0px 3px 8px;
 }
 
 .box .title {
@@ -66,6 +173,7 @@ p {
     display: grid;
     grid-template-columns: repeat(2,1fr);
     margin: 5px 10px;
+    padding: 5px;
 
     color: var(--clr-dark);
 }
@@ -129,6 +237,8 @@ input[data-last-active-input="true"] {
 .patients .list-img img {
   width: 50px;
   height: 50px;
+  border: 2px solid var(--clr-light);
+  border-radius: 100%;
 }
 
 .patients .patient {
@@ -140,6 +250,7 @@ input[data-last-active-input="true"] {
    background-color: var(--clr-dark);
    color: var(--clr-light);
    cursor: pointer;
+   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
   /* display: grid;
   grid-template-columns: repeat(3,1fr);
@@ -248,6 +359,13 @@ input[data-last-active-input="true"] {
     padding: 20px;
 }
 
+.hide {
+    display: none;
+    
+}
+.flex {
+    display: flex;
+}
 
 
 .box .chart {

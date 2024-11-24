@@ -13,9 +13,9 @@ fetch("https://fedskillstest.coalitiontechnologies.workers.dev", requestOptions)
   .then((data) => {
     const pList = document.querySelector(".patients");
     //console.log(pList);
-    console.log(data);
+   // console.log(data);
 
-    patientOne = data[0];
+    //patientOne = data[0];
     //console.log(patientOne);
 
     let patient;
@@ -98,16 +98,18 @@ fetch("https://fedskillstest.coalitiontechnologies.workers.dev", requestOptions)
     });
 
 
+    let wholeList = pList.childNodes;
+    pList.removeChild(wholeList[0]);
     
-    pChildren = pList.children;
+    let pChildren = pList.childNodes;
     console.log(pChildren);
 
     for (let i = 0; i < data.length; i++) {
         pChildren[i].addEventListener('click', function () {
        //  console.log(pChildren[i]);
-        // var child = pChildren[i];
+        var child = pChildren[i];
          showInformation(data[i]);
-       //  console.log(pPic);
+         console.log(data[i]);
         })
     }
 
@@ -116,7 +118,6 @@ fetch("https://fedskillstest.coalitiontechnologies.workers.dev", requestOptions)
 
 
     function showInformation (patientInfo) {
-
 
       profile.innerHTML = `
         <div class="profile-wrap">
@@ -171,7 +172,89 @@ fetch("https://fedskillstest.coalitiontechnologies.workers.dev", requestOptions)
         }, 1);
         
 
+
     }
+
+    
+
+    
+  
+
+
+    let pInput = document.querySelector('#iInput');
+    let pSearch = document.querySelector('#iSearch');
+    //console.log(pSearch);
+    pSearch.style.cursor = 'pointer';
+    let pInputValue;
+
+    pInput.addEventListener('input', ()=> {
+      pInputValue = pInput.value.toLowerCase();
+      console.log(pInputValue);
+    })
+
+
+    
+    pSearch.addEventListener('click', ()=> {
+      search(); 
+      console.log('click')
+    })
+
+  
+    let nameText;
+
+    function search () {
+    //   pChildren.forEach(h => {
+    //     //nameText = h.querySelector('h5');   // throws error because child nodes includes heading text too 
+    //      console.log(h);
+    //    })      
+
+    // console.log(pInputValue);
+
+    for (let h = 1; h < pChildren.length; h++) {
+       nameText = pChildren[h].querySelector('h5').innerText;
+     // console.log(pChildren[h]);
+       finalName = nameText.toLowerCase();
+      //console.log(finalName);
+
+      pInput.addEventListener('focusout', function () {      
+        pChildren[h].classList.remove('hide');
+        pChildren[h].classList.add('patient');
+        
+      })
+
+      if (!(finalName.includes(pInputValue))) {
+     // console.log('text');
+       pChildren[h].classList.remove('patient');
+       pChildren[h].classList.add('hide');
+      } 
+
+      //console.log(pInput);
+     // console.log(pChildren[h]);
+    
+    }
+   
+    }
+
+   
+      
+
+
+    // let chartInstance;
+
+
+    // data.forEach(dt >= {
+    //   new Chart(
+    //     document.getElementById('lineChart'),
+    //     {
+    //       type: 'line',
+    //       data: {
+            
+    //       }
+    //     }
+    //   );
+    // })
+    
+    
     
 
   })
