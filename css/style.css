@@ -44,6 +44,7 @@ p, h1, h2, h5 {
     grid-template-columns: repeat(3,1fr);
     margin: 20px;
     padding: 10px;
+    width: 100%;
     border-radius: 40px;
     color: var(--clr-lighter);
     background-color: var(--clr-dark);
