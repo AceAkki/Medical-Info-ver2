@@ -44,7 +44,6 @@ p, h1, h2, h5 {
     grid-template-columns: repeat(3,1fr);
     margin: 20px;
     padding: 10px;
-    max-width: 100%;
     border-radius: 40px;
     color: var(--clr-lighter);
     background-color: var(--clr-dark);
@@ -128,7 +127,7 @@ p, h1, h2, h5 {
 .bento-grid {
 
     width: 98%;
-    height: 800px ;
+    height: 800px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto;
