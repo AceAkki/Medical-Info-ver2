@@ -1,125 +1,125 @@
-document.addEventListener('DOMContentLoaded', function() {
-var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic Y29hbGl0aW9uOnNraWxscy10ZXN0");
+document.addEventListener("DOMContentLoaded", function () {
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "Basic Y29hbGl0aW9uOnNraWxscy10ZXN0");
 
-var requestOptions = {
-  method: "GET",
-  headers: myHeaders,
-  redirect: "follow",
-};
+  var requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
 
-fetch("https://fedskillstest.coalitiontechnologies.workers.dev", requestOptions)
-  .then((response) => response.json())
-  .then((data) => {
-    const pList = document.querySelector(".patients");
-    //console.log(pList);
-   // console.log(data);
+  fetch(
+    "https://fedskillstest.coalitiontechnologies.workers.dev",
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      const pList = document.querySelector(".patients");
+      //console.log(pList);
+      // console.log(data);
 
-    //patientOne = data[0];
-    //console.log(patientOne);
+      //patientOne = data[0];
+      //console.log(patientOne);
 
-    let patient;
-    let patientImg;
-    let pPic;
-    let patientName;
+      let patient;
+      let patientImg;
+      let pPic;
+      let patientName;
 
-    let imageSrc; 
-    let name;
-    let age;
-    let gender;
+      let imageSrc;
+      let name;
+      let age;
+      let gender;
 
-    data.forEach((dt) => {
-      // console.log(dt);
+      data.forEach((dt) => {
+        // console.log(dt);
 
-    
-      // console.log(dt.profile_picture);
-      patient = document.createElement("div");
-      patient.classList.add("patient");
+        // console.log(dt.profile_picture);
+        patient = document.createElement("div");
+        patient.classList.add("patient");
 
-      patientImg = document.createElement('div'); 
-      patientImg.classList.add('list-img')     
-      pPic = document.createElement("img");
+        patientImg = document.createElement("div");
+        patientImg.classList.add("list-img");
+        pPic = document.createElement("img");
 
-      let moreImg = document.createElement('div');
-      let morePic = document.createElement('img');
+        let moreImg = document.createElement("div");
+        let morePic = document.createElement("img");
 
-      let allWrap = document.createElement('div');
-      allWrap.classList.add('allWrap');
+        let allWrap = document.createElement("div");
+        allWrap.classList.add("allWrap");
 
-      patientName = document.createElement('div');
-      let pName = document.createElement('h5');
-      pName.classList.add('name');
-      
-      let detWrap = document.createElement('div');
-      detWrap.classList.add('detWrap');
-      let patientAge = document.createElement('div'); 
-      let pAge = document.createElement('p');
-      let patientGender = document.createElement('div');
-      let pGender = document.createElement('p');
+        patientName = document.createElement("div");
+        let pName = document.createElement("h5");
+        pName.classList.add("name");
 
-     // console.log(pPic);
-     
-      imageSrc = dt.profile_picture;
-      pPic.src = imageSrc;
+        let detWrap = document.createElement("div");
+        detWrap.classList.add("detWrap");
+        let patientAge = document.createElement("div");
+        let pAge = document.createElement("p");
+        let patientGender = document.createElement("div");
+        let pGender = document.createElement("p");
 
-      morePic.src = 'img/more_hori.svg';
-      morePic.classList.add('icon');
+        // console.log(pPic);
 
-      name = dt.name;
-      pName.textContent = name;
-      
+        imageSrc = dt.profile_picture;
+        pPic.src = imageSrc;
 
-      age = dt.age;
-      pAge.textContent = age;
+        morePic.src = "img/more_hori.svg";
+        morePic.classList.add("icon");
 
-      gender = dt.gender;
-      pGender.textContent = gender;
+        name = dt.name;
+        pName.textContent = name;
 
-     // console.log(imageSrc);
-     // console.log(name);
+        age = dt.age;
+        pAge.textContent = age;
 
-     
-      pList.appendChild(patient);
-      patient.appendChild(patientImg);
-      patient.appendChild(allWrap);
-      patient.appendChild(moreImg);
-      moreImg.appendChild(morePic);
-      allWrap.appendChild(patientName);
-      allWrap.appendChild(detWrap);
-      detWrap.appendChild(patientGender);
-      detWrap.appendChild(patientAge);
- 
-      
-      patientImg.appendChild(pPic);
-      patientName.appendChild(pName);
-      patientAge.appendChild(pAge);
-      patientGender.appendChild(pGender);    
+        gender = dt.gender;
+        pGender.textContent = gender;
 
-    });
+        // console.log(imageSrc);
+        // console.log(name);
 
+        pList.appendChild(patient);
+        patient.appendChild(patientImg);
+        patient.appendChild(allWrap);
+        patient.appendChild(moreImg);
+        moreImg.appendChild(morePic);
+        allWrap.appendChild(patientName);
+        allWrap.appendChild(detWrap);
+        detWrap.appendChild(patientGender);
+        detWrap.appendChild(patientAge);
 
-    let wholeList = pList.childNodes;
-    pList.removeChild(wholeList[0]);
-    
-    let pChildren = pList.childNodes;
-    console.log(pChildren);
+        patientImg.appendChild(pPic);
+        patientName.appendChild(pName);
+        patientAge.appendChild(pAge);
+        patientGender.appendChild(pGender);
+      });
 
-    for (let i = 0; i < data.length; i++) {
-        pChildren[i].addEventListener('click', function () {
-       //  console.log(pChildren[i]);
-        var child = pChildren[i];
-         showInformation(data[i]);
-         console.log(data[i]);
-        })
-    }
+      let wholeList = pList.childNodes;
+      pList.removeChild(wholeList[0]);
 
-    const profile = document.querySelector('.profile');
+      let pChildren = pList.childNodes;
+      console.log(pChildren);
 
+      let index = null;
 
+      for (let i = 0; i < data.length; i++) {
+        index = i;
+        pChildren[i].addEventListener("click", function () {
+          //  console.log(pChildren[i]);
+          var child = pChildren[i];
+          showInformation(data[i]);
+          showAll.addEventListener("click", (e) => {
+            getdata(data[i]);
+          });
+          console.log(data[i]);
+        });
+      }
 
-    function showInformation (patientInfo) {
+      const profile = document.querySelector(".profile");
 
-      profile.innerHTML = `
+      function showInformation(patientInfo) {
+        profile.innerHTML = `
         <div class="profile-wrap">
             <div class="profile-img">
                 <img src="${patientInfo.profile_picture}">
@@ -151,114 +151,144 @@ fetch("https://fedskillstest.coalitiontechnologies.workers.dev", requestOptions)
                    <span class="data"> ${patientInfo.insurance_type} <span></p> 
                 </div>
                 <div class="button-wrap">
-                  <a class="button"> Show All Information </a>
+                  <a class="button" id="showAll" style="cursor:pointer"> Show All Information </a>
                 </div>
 
             </div
-        </div`
-        
-       let change = setInterval(function () {
-     
+        </div`;
+
+        let change = setInterval(function () {
           console.log(patientInfo.gender);
-          var changeIcon = document.getElementById('gender');
-          if (patientInfo.gender === 'Female') {
-            
-           // console.log(changeIcon);
-             changeIcon.src = "img/FemaleIcon.svg";
+          var changeIcon = document.getElementById("gender");
+          if (patientInfo.gender === "Female") {
+            // console.log(changeIcon);
+            changeIcon.src = "img/FemaleIcon.svg";
           } else {
             changeIcon.src = "img/MaleIcon.svg";
           }
           clearInterval(change);
         }, 1);
-        
+      }
 
+      let pInput = document.querySelector("#iInput");
+      let pSearch = document.querySelector("#iSearch");
+      //console.log(pSearch);
+      pSearch.style.cursor = "pointer";
+      let pInputValue;
 
-    }
+      pInput.addEventListener("input", () => {
+        pInputValue = pInput.value.toLowerCase();
+        console.log(pInputValue);
+      });
 
-    
+      pSearch.addEventListener("click", () => {
+        search();
+        console.log("click");
+      });
 
-    
-  
+      let nameText;
 
+      function search() {
+        //   pChildren.forEach(h => {
+        //     //nameText = h.querySelector('h5');   // throws error because child nodes includes heading text too
+        //      console.log(h);
+        //    })
 
-    let pInput = document.querySelector('#iInput');
-    let pSearch = document.querySelector('#iSearch');
-    //console.log(pSearch);
-    pSearch.style.cursor = 'pointer';
-    let pInputValue;
+        // console.log(pInputValue);
 
-    pInput.addEventListener('input', ()=> {
-      pInputValue = pInput.value.toLowerCase();
-      console.log(pInputValue);
+        for (let h = 1; h < pChildren.length; h++) {
+          nameText = pChildren[h].querySelector("h5").innerText;
+          // console.log(pChildren[h]);
+          finalName = nameText.toLowerCase();
+          //console.log(finalName);
+
+          pInput.addEventListener("focusout", function () {
+            pChildren[h].classList.remove("hide");
+            pChildren[h].classList.add("patient");
+          });
+
+          if (!finalName.includes(pInputValue)) {
+            // console.log('text');
+            pChildren[h].classList.remove("patient");
+            pChildren[h].classList.add("hide");
+          }
+
+          //console.log(pInput);
+          // console.log(pChildren[h]);
+        }
+      }
+
+      let labResults = [];
+      let lab = document.querySelector(".lab");
+      let labContainer = lab.querySelector(".api-wrap");
+
+      function getdata(dt) {
+        console.log(dt.diagnosis_history);
+
+        labResults.push(dt.lab_results);
+        console.log(labResults);
+        let labTable = document.createElement('table');
+        let labHead = document.createElement('thead');
+        let labThsr = document.createElement('th');
+        let labTh = document.createElement('th');
+        let labBody = document.createElement('tbody');
+
+        labContainer.appendChild(labTable);
+        labTable.appendChild(labHead);
+        labTable.appendChild(labBody);
+
+        labResults.forEach(re => {
+          let labRes = document.createElement('tr');
+          labBody.appendChild(labRes);
+          labRes.textContent = re;
+          console.log(re)
+        })
+      }
+
+      let chartInstance;
+
+      // Get the canvas element by its ID
+      const ctx = document.getElementById("lineChart").getContext("2d");
+
+      // Create the chart
+      const myChart = new Chart(ctx, {
+        type: "bar", // Type of chart ('bar', 'line', 'pie', etc.)
+        data: {
+          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"], // Labels for the X-axis
+          datasets: [
+            {
+              label: "# of Votes", // Dataset label
+              data: [12, 19, 3, 5, 2, 3], // Data points for the chart
+              backgroundColor: [
+                // Background colors for bars
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+              ],
+              borderColor: [
+                // Border colors for bars
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+              ],
+              borderWidth: 1, // Border width for bars
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true, // Start Y-axis at 0
+            },
+          },
+        },
+      });
     })
-
-
-    
-    pSearch.addEventListener('click', ()=> {
-      search(); 
-      console.log('click')
-    })
-
-  
-    let nameText;
-
-    function search () {
-    //   pChildren.forEach(h => {
-    //     //nameText = h.querySelector('h5');   // throws error because child nodes includes heading text too 
-    //      console.log(h);
-    //    })      
-
-    // console.log(pInputValue);
-
-    for (let h = 1; h < pChildren.length; h++) {
-       nameText = pChildren[h].querySelector('h5').innerText;
-     // console.log(pChildren[h]);
-       finalName = nameText.toLowerCase();
-      //console.log(finalName);
-
-      pInput.addEventListener('focusout', function () {      
-        pChildren[h].classList.remove('hide');
-        pChildren[h].classList.add('patient');
-        
-      })
-
-      if (!(finalName.includes(pInputValue))) {
-     // console.log('text');
-       pChildren[h].classList.remove('patient');
-       pChildren[h].classList.add('hide');
-      } 
-
-      //console.log(pInput);
-     // console.log(pChildren[h]);
-    
-    }
-   
-    }
-
-   
-      
-
-
-    // let chartInstance;
-
-
-    // data.forEach(dt >= {
-    //   new Chart(
-    //     document.getElementById('lineChart'),
-    //     {
-    //       type: 'line',
-    //       data: {
-            
-    //       }
-    //     }
-    //   );
-    // })
-    
-    
-    
-
-  })
-  .catch((error) => console.error("error", error));
-;
-
-})
+    .catch((error) => console.error("error", error));
+});
