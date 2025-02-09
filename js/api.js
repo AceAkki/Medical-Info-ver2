@@ -218,14 +218,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
 
-      let labResults = [];
+      let labResults = '';
       let lab = document.querySelector(".lab");
       let labContainer = lab.querySelector(".api-wrap");
 
       function getdata(dt) {
         console.log(dt.diagnosis_history);
 
-        labResults.push(dt.lab_results);
+        labResults = dt.lab_results;
         console.log(labResults);
         let labTable = document.createElement('table');
         let labHead = document.createElement('thead');
@@ -235,14 +235,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
         labContainer.appendChild(labTable);
         labTable.appendChild(labHead);
+
+        labThsr.textContent = 'Sr No'
+        labTh.textContent = 'Name'
+
+
+        labHead.appendChild(labThsr);
+        labHead.appendChild(labTh);
         labTable.appendChild(labBody);
 
         labResults.forEach(re => {
-          let labRes = document.createElement('tr');
-          labBody.appendChild(labRes);
-          labRes.textContent = re;
+          let labRow = document.createElement('tr');
+          let labTD = document.createElement('td');
+          let labTD1 = document.createElement('td');
+          
+          labBody.appendChild(labRow);
+          labRow.appendChild(labTD);
+          labRow.appendChild(labTD1);
+          labTD1.textContent = re;
           console.log(re)
         })
+
+        let firstChild = labTable.querySelectorAll('td:nth-child(1)');
+        console.log(firstChild);
+        for (let i = 0; i < firstChild.length; i++) {
+          firstChild[i].textContent += i + 1;          
+        }
+        
       }
 
       let chartInstance;
