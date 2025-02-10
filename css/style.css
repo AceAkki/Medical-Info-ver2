@@ -39,7 +39,7 @@ h5 {
 }
 
 table {
-  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 /* header styles  */
@@ -243,7 +243,7 @@ input[data-last-active-input="true"] {
 
 .patients {
   margin: 0 5px 10px;
-  height: 100vh;
+  max-height: 150vh;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -384,17 +384,64 @@ input[data-last-active-input="true"] {
 }
 .flex {
   display: flex;
+  
 }
 
-.lab .api-wrap table {
-  padding: 10px;
+
+.d-list .api-wrap table {
   margin: 10px;
+  border: 2px solid var(--clr-secondary);
+  border-radius: 15px 15px 0 0;
+  max-height: 100vh;
+  overflow-x: auto;
+}
+
+.d-list tr, td, th {
+  padding: 5px;
+  border: 2px solid var(--clr-secondary);
+}
+
+.d-list th:first-child {
+  border-radius: 12px 0 0 0;
+}
+.d-list th:last-child {
+  border-radius: 0px 12px 0 0;
+}
+.d-list table td:nth-child(1) {
+  text-align: center;
+}
+
+.d-list table td:nth-child(2) {
+  padding-left: 5px;
+}
+
+.table {
+  max-height: 30vh;
+  overflow-x: auto;
+}
+
+
+.lab .api-wrap table {
+  margin: 10px;
+  border: 2px solid var(--clr-secondary);
+  border-radius: 15px 15px 0 0;
+  max-height: 100vh;
+  overflow-x: auto;
 }
 
 .lab tr, td, th {
-  border:2px solid var(--clr-secondary);
+  padding: 5px;
+  border: 2px solid var(--clr-secondary);
 }
 
+
+
+.lab th:first-child {
+  border-radius: 12px 0 0 0;
+}
+.lab th:last-child {
+  border-radius: 0px 12px 0 0;
+}
 .lab table td:nth-child(1) {
   text-align: center;
 }
