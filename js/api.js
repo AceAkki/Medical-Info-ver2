@@ -111,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
           showInformation(data[i]);
           showAll.addEventListener("click", (e) => {
             getdata(data[i]);
+            getList(data[i])
           });
           console.log(data[i]);
         });
@@ -222,18 +223,31 @@ document.addEventListener("DOMContentLoaded", function () {
       let lab = document.querySelector(".lab");
       let labContainer = lab.querySelector(".api-wrap");
 
+      let diagnosisList = ''
+      let dListElem = document.querySelector(".d-list");
+      let listContainer = dListElem.querySelector(".api-wrap");
+
       function getdata(dt) {
+
+        let getTable = labContainer.querySelector('table');
+        if (getTable) {
+          getTable.remove()
+        }
         console.log(dt.diagnosis_history);
 
         labResults = dt.lab_results;
         console.log(labResults);
+
+        let labDiv = document.createElement('div');
         let labTable = document.createElement('table');
         let labHead = document.createElement('thead');
         let labThsr = document.createElement('th');
         let labTh = document.createElement('th');
         let labBody = document.createElement('tbody');
 
-        labContainer.appendChild(labTable);
+        labContainer.appendChild(labDiv);
+        labDiv.classList.add('table');
+        labDiv.appendChild(labTable);
         labTable.appendChild(labHead);
 
         labThsr.textContent = 'Sr No'
@@ -260,8 +274,73 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(firstChild);
         for (let i = 0; i < firstChild.length; i++) {
           firstChild[i].textContent += i + 1;          
+        }          
+      }
+
+      function getList (dt) {
+        diagnosisList = dt.diagnostic_list;
+        console.log(diagnosisList);
+
+        let getTable = listContainer.querySelector('table');
+        if (getTable) {
+          getTable.remove()
         }
+
+        let dDiv = document.createElement('div');
+        let dTable = document.createElement('table');
+        let dHead = document.createElement('thead');
+        let dThsr = document.createElement('th');
+        let dThName = document.createElement('th');
+        let dThDesc = document.createElement('th');
+        let dThStat = document.createElement('th');
+        let dBody = document.createElement('tbody');
+
+      
+        listContainer.appendChild(dDiv);
+        dDiv.classList.add('table');
+        dDiv.appendChild(dTable);
+        dTable.appendChild(dHead);
+
+        dThsr.textContent = 'Sr No';
+        dThName.textContent = 'Name';
+        dThDesc.textContent = 'Description';
+        dThStat.textContent = 'Status';
+
+
+        dHead.appendChild(dThsr);
+        dHead.appendChild(dThName);
+        dHead.appendChild(dThDesc);
+        dHead.appendChild(dThStat);
+        dTable.appendChild(dBody);
+
         
+        diagnosisList.forEach(list => {
+          console.log(list)
+          let dRow = document.createElement('tr');
+          let dTDsr = document.createElement('td');
+          let dTDname = document.createElement('td');
+          let dTDdesc = document.createElement('td');
+          let dTDstat = document.createElement('td');
+          
+          dBody.appendChild(dRow);
+          dRow.appendChild(dTDsr);
+          dRow.appendChild(dTDname);
+          dRow.appendChild(dTDdesc);
+          dRow.appendChild(dTDstat);
+
+          dTDname.textContent = list.name;
+          dTDdesc.textContent = list.description;
+          dTDstat.textContent = list.status;
+
+        
+        })
+        
+
+        let firstChildAg = dTable.querySelectorAll('td:nth-child(1)');
+        console.log(firstChildAg);
+        for (let i = 0; i < firstChildAg.length; i++) {
+          firstChildAg[i].textContent += i + 1;          
+        }
       }
 
       let chartInstance;
