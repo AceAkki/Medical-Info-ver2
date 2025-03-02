@@ -434,6 +434,13 @@ document.addEventListener("DOMContentLoaded", function () {
             },
           },
         });
+
+        let oldTileWrap = document.querySelector('.tile-wrap');
+        console.log(oldTileWrap)
+
+        if (oldTileWrap) {
+          oldTileWrap.remove();
+        }
         
         let createDiv = document.createElement('div');
         canvasWrap.appendChild(createDiv);
