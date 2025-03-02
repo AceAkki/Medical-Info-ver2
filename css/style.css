@@ -32,7 +32,7 @@ body {
 
 p,
 h1,
-h2,
+h2,h3,h4,
 h5 {
   margin: 0;
   padding: 0;
@@ -46,8 +46,7 @@ table {
 .header {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-
-  margin: 1% 1%;
+  margin: 1% 1%;  
   gap: 1vw;
   padding: 10px;
   border-radius: 40px;
@@ -184,11 +183,19 @@ table {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.box .title {
+.p-list .title {
   /* display: flex;
     justify-content: space-between; */
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  margin: 5px 10px;
+  padding: 5px;
+
+  color: var(--clr-dark);
+}
+.box .title {
+  /* display: flex;
+    justify-content: space-between; */
   margin: 5px 10px;
   padding: 5px;
 
@@ -239,11 +246,12 @@ input[data-last-active-input="true"] {
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 100vw;
 }
 
 .patients {
   margin: 0 5px 10px;
-  max-height: 150vh;
+  max-height: 130vh;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -427,6 +435,7 @@ input[data-last-active-input="true"] {
   border-radius: 15px 15px 0 0;
   max-height: 100vh;
   overflow-x: auto;
+  overflow-y: auto;
 }
 
 .lab tr, td, th {
@@ -454,6 +463,41 @@ input[data-last-active-input="true"] {
 .box .chart {
   display: flex;
   flex-direction: column;
+  text-align: center;
+}
+
+.canvas-wrap {
+  overflow-x: auto;
+  overflow-y: auto;
+  margin: 20px;
+}
+
+.tile-wrap {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  margin: 20px;
+  gap:10px;
+  align-self: center;
+  min-width: 70%;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--clr-secondary);
+  padding: 15% 15%;
+  border-radius: 20px;
+
+  text-align: center;
+  gap: 2%;
+}
+
+.tile img {
+ max-width: 100%;
+}
+
+.tile h4, h5 {
+  font-weight: 600;
 }
 
 @media screen and (max-width: 834px) {
@@ -465,6 +509,11 @@ input[data-last-active-input="true"] {
       "chart"
       "list1"
       "result";
+  }
+
+  h4, h5 {
+    font-size: 12px;
+  
   }
 }
 
