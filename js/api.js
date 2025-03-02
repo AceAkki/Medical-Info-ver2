@@ -111,7 +111,8 @@ document.addEventListener("DOMContentLoaded", function () {
           showInformation(data[i]);
           showAll.addEventListener("click", (e) => {
             getdata(data[i]);
-            getList(data[i])
+            getList(data[i]);
+            getHistory(data[i]);
           });
           console.log(data[i]);
         });
@@ -223,9 +224,13 @@ document.addEventListener("DOMContentLoaded", function () {
       let lab = document.querySelector(".lab");
       let labContainer = lab.querySelector(".api-wrap");
 
-      let diagnosisList = ''
+      let diagnosisList = '';
       let dListElem = document.querySelector(".d-list");
       let listContainer = dListElem.querySelector(".api-wrap");
+
+      let diagnosisHistory = '';
+      let chartInstance;
+      let canvasWrap = document.querySelector('.chart .api-wrap');
 
       function getdata(dt) {
 
@@ -341,52 +346,204 @@ document.addEventListener("DOMContentLoaded", function () {
         for (let i = 0; i < firstChildAg.length; i++) {
           firstChildAg[i].textContent += i + 1;          
         }
+
+    
       }
 
-      let chartInstance;
 
-      // Get the canvas element by its ID
-      const ctx = document.getElementById("lineChart").getContext("2d");
+      function getHistory (dt) {
+        diagnosisHistory = dt.diagnosis_history;
+        console.log(diagnosisHistory);
+        const labels = diagnosisHistory.map((label) => `${label.month} ${label.year}`);
+        console.log(labels);
 
-      // Create the chart
-      const myChart = new Chart(ctx, {
-        type: "bar", // Type of chart ('bar', 'line', 'pie', etc.)
-        data: {
-          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"], // Labels for the X-axis
-          datasets: [
-            {
-              label: "# of Votes", // Dataset label
-              data: [12, 19, 3, 5, 2, 3], // Data points for the chart
-              backgroundColor: [
-                // Background colors for bars
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(255, 206, 86, 0.2)",
-                "rgba(75, 192, 192, 0.2)",
-                "rgba(153, 102, 255, 0.2)",
-                "rgba(255, 159, 64, 0.2)",
-              ],
-              borderColor: [
-                // Border colors for bars
-                "rgba(255, 99, 132, 1)",
-                "rgba(54, 162, 235, 1)",
-                "rgba(255, 206, 86, 1)",
-                "rgba(75, 192, 192, 1)",
-                "rgba(153, 102, 255, 1)",
-                "rgba(255, 159, 64, 1)",
-              ],
-              borderWidth: 1, // Border width for bars
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true, // Start Y-axis at 0
+        const systolicData = diagnosisHistory.map((label) => label.blood_pressure.systolic.value);
+        const systolicLevels = diagnosisHistory.map((label) => label.blood_pressure.systolic.levels);
+        const diastolicData = diagnosisHistory.map((label) => label.blood_pressure.diastolic.value);
+        const heartRateData = diagnosisHistory.map((label) => label.heart_rate.value);
+        const heartRateLevels = diagnosisHistory.map((label) => label.heart_rate.levels);
+        const respiratoryRateData = diagnosisHistory.map((label) => label.respiratory_rate.value);
+        const respiratoryRateLevels = diagnosisHistory.map((label) => label.respiratory_rate.levels);
+        const temperatureData = diagnosisHistory.map((label) => label.temperature.value);
+        const temperatureLevels = diagnosisHistory.map((label) => label.temperature.levels);
+
+        const ctx = document.getElementById("lineChart").getContext("2d");
+
+        if (chartInstance) {
+          chartInstance.destroy();
+        }
+        chartInstance = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Systolic Blood Pressure",
+                data: systolicData,
+                borderColor: "rgba(255, 99, 132, 1)",
+                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                fill: false,
+              },
+              {
+                label: "Diastolic Blood Pressure",
+                data: diastolicData,
+                borderColor: "rgba(54, 162, 235, 1)",
+                backgroundColor: "rgba(54, 162, 235, 0.2)",
+                fill: false,
+              },
+              {
+                label: "Heart Rate",
+                data: heartRateData,
+                borderColor: "rgba(75, 192, 192, 1)",
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                fill: false,
+              },
+              {
+                label: "Respiratory Rate",
+                data: respiratoryRateData,
+                borderColor: "rgba(153, 102, 255, 1)",
+                backgroundColor: "rgba(153, 102, 255, 0.2)",
+                fill: false,
+              },
+              {
+                label: "Temperature",
+                data: temperatureData,
+                borderColor: "rgba(255, 206, 86, 1)",
+                backgroundColor: "rgba(255, 206, 86, 0.2)",
+                fill: false,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            scales: {
+              x: {
+                display: true,
+                title: {
+                  display: true,
+                  text: "Month",
+                },
+              },
+              y: {
+                display: true,
+                title: {
+                  display: true,
+                  text: "Value",
+                },
+              },
             },
           },
-        },
-      });
+        });
+        
+        let createDiv = document.createElement('div');
+        canvasWrap.appendChild(createDiv);
+        createDiv.classList.add('tile-wrap')
+
+        
+
+        let createTile = document.createElement('div'); 
+        createTile.classList.add('tile');       
+        let createImg = document.createElement('img');
+        createImg.setAttribute('src', 'img/HeartBPM.svg');
+        createDiv.appendChild(createTile);
+
+        let createWrapHrt = document.createElement('div');
+        let createWrapImgHrt = document.createElement('div');
+        createTile.appendChild(createWrapImgHrt); 
+        createTile.appendChild(createWrapHrt); 
+        
+        let createTitle = document.createElement('h4');
+        createTitle.textContent = 'Heart Rate';
+        let createSub = document.createElement('h5');
+        let createSubL = document.createElement('h5');
+        createSub.textContent = heartRateData[-0];
+        createSubL.textContent = heartRateLevels[-0];
+        createWrapImgHrt.appendChild(createImg);
+        createWrapHrt.appendChild(createTitle);
+        createWrapHrt.appendChild(createSub);
+        createWrapHrt.appendChild(createSubL);
+
+
+
+
+        let createTileTemp = document.createElement('div'); 
+        createTileTemp.classList.add('tile');       
+        let createImgTemp = document.createElement('img');
+        createImgTemp.setAttribute('src', 'img/temperature.svg');
+        createDiv.appendChild(createTileTemp);
+
+        let createWrap = document.createElement('div');
+        let createWrapImg = document.createElement('div');
+        createTileTemp.appendChild(createWrapImg); 
+        createTileTemp.appendChild(createWrap); 
+
+        let createTitleTemp = document.createElement('h4');
+        createTitleTemp.textContent = 'Temp Rate';
+        let createSubTemp = document.createElement('h5');
+        createSubTemp.textContent = temperatureData[-0];
+        let createSubTempL = document.createElement('h5');
+        createSubTempL.textContent = temperatureLevels[-0];
+
+        createWrapImg.appendChild(createImgTemp);
+        createWrap.appendChild(createTitleTemp);
+        createWrap.appendChild(createSubTemp);
+        createWrap.appendChild(createSubTempL);
+
+
+
+
+        let createTileRes = document.createElement('div'); 
+        createTileRes.classList.add('tile');       
+        let createImgRes = document.createElement('img');
+        createImgRes.setAttribute('src', 'img/respiratory rate.svg');
+        createDiv.appendChild(createTileRes);
+
+        let createWrapRes = document.createElement('div');
+        let createWrapResImg = document.createElement('div');
+        createTileRes.appendChild(createWrapResImg); 
+        createTileRes.appendChild(createWrapRes); 
+        
+        let createTitleRes = document.createElement('h4');
+        createTitleRes.textContent = 'Res Rate';
+        let createSubRes = document.createElement('h5');
+        createSubRes.textContent = respiratoryRateData[-0];
+        let createSubResL = document.createElement('h5');
+        createSubResL.textContent = respiratoryRateLevels[-0];
+
+        createWrapRes.appendChild(createImgRes);
+        createWrapRes.appendChild(createTitleRes);
+        createTileRes.appendChild(createSubRes);
+        createTileRes.appendChild(createSubResL);
+        
+      }
+
+      // const dataOne = [
+      //   { year: 2010, count: 10 },
+      //   { year: 2011, count: 20 },
+      //   { year: 2012, count: 15 },
+      //   { year: 2013, count: 25 },
+      //   { year: 2014, count: 22 },
+      //   { year: 2015, count: 30 },
+      //   { year: 2016, count: 28 },
+      // ];
+    
+      // new Chart(
+      //   document.getElementById('lineChart'),
+      //   {
+      //     type: 'bar',
+      //     data: {
+      //       labels: dataOne.map(row => row.year),
+      //       datasets: [
+      //         {
+      //           label: 'Acquisitions by year',
+      //           data: dataOne.map(row => row.count)
+      //         }
+      //       ]
+      //     }
+      //   }
+      // );
+
+
     })
     .catch((error) => console.error("error", error));
 });
