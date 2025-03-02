@@ -443,6 +443,10 @@ input[data-last-active-input="true"] {
   border: 2px solid var(--clr-secondary);
 }
 
+.lab th, .d-list th {
+  background-color: var(--clr-secondary);
+  color: var(--clr-lighter);
+}
 
 
 .lab th:first-child {
