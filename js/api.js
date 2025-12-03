@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   var myHeaders = new Headers();
-  myHeaders.append("Authorization", "Basic Y29hbGl0aW9uOnNraWxscy10ZXN0");
+  myHeaders.append("Authorization", "Basic ");
 
   var requestOptions = {
     method: "GET",
@@ -554,3 +554,4 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .catch((error) => console.error("error", error));
 });
+
